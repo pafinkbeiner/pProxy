@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pProxy</title>
+</head>
+<body>
+    
+    Simple Proxy
+
+    <br/><br/>
+
+    <form action="/new" method="post">
+        
+        <input type="text" name="server_name" id="server_name" placeholder="server_name">
+
+        <input type="text" name="protocol" id="protocol" placeholder="protocol">
+
+        <input type="text" name="ip" id="ip" placeholder="ip">
+
+        <input type="text" name="port" id="port" placeholder="port">
+
+        <input type="submit" value="Save">
+
+    </form>
+
+    <br/>
+    <br/>
+
+    <textarea id="data" name="data" cols="100"></textarea>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const BASE_URL = 'http://localhost:5002/all';
+
+        const getData = async () => {
+        try {
+            const res = await axios.get(`${BASE_URL}`);
+
+            const data = res.data;
+
+            for(var i = 0; i < data.length; i++){
+                document.getElementById("data").append(`Entry ${i}: ${data[i].server_name} --> ${data[i].proxy_pass.protocol}://${data[i].proxy_pass.ip}:${data[i].proxy_pass.port}`);
+                document.getElementById("data").append(`\n`);
+            }
+
+            return data;
+        } catch (e) {
+            console.error(e);
+        }
+        };
+
+        getData();
+
+    </script>
+
+</body>
+</html>

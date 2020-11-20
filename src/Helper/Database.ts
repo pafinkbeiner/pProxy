@@ -11,24 +11,19 @@ var db = new JsonDB(new Config("db", true, false, '/'));
 export class Database{
 
     set(key:string, data: any){
-        db.push(`/${key}`,data);
-    }
-
-    update(key:string, data: any){
-        this.remove(key);
-        this.set(key, data);
+        db.push(`/data[${key}]`,data);
     }
 
     get(key: string): any{
-        return db.getData(`/${key}`);
+        return db.getData(`/data[${key}]`);
     }
 
     getAll(){
-        return db.getData(`/`);
+        return db.getData(`/data[]`);
     }
 
     remove(key: string){
-        db.delete(`/${key}`);
+        db.delete(`/data[${key}]`);
     }
 }
 
