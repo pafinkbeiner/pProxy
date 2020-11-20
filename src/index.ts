@@ -42,7 +42,7 @@ app.use(function(err: any, req: any, res: any, next: any) {
 // start the express server
 app.listen( port, () => {
 	// tslint:disable-next-line:no-console
-	console.log( `DB started at http://localhost:${ port }` );
+	console.log( `Application started at http://localhost:${ port }` );
 } );
 
 app.on("error", onError);
