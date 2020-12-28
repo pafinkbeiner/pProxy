@@ -15,6 +15,8 @@
         
         <input type="text" name="server_name" id="server_name" placeholder="server_name">
 
+        <input type="text" name="server_port" id="server_port" placeholder="server_port">
+
         <input type="text" name="protocol" id="protocol" placeholder="protocol">
 
         <input type="text" name="ip" id="ip" placeholder="ip">
@@ -40,8 +42,10 @@
 
             const data = res.data;
 
+            console.log("fetched data: ",data);
+
             for(var i = 0; i < data.length; i++){
-                document.getElementById("data").append(`Entry ${i}: ${data[i].server_name} --> ${data[i].proxy_pass.protocol}://${data[i].proxy_pass.ip}:${data[i].proxy_pass.port}`);
+                document.getElementById("data").append(`Entry ${i}: ${data[i].server_name}:${data[i].server_port} --> ${data[i].proxy_pass.protocol}://${data[i].proxy_pass.ip}:${data[i].proxy_pass.port}`);
                 document.getElementById("data").append(`\n`);
             }
 

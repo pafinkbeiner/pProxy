@@ -2,8 +2,12 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
+import { FileWriterHandler } from "./Helper/FileWriter";
 import indexRouter from "./routes/index"
 const createError = require("http-errors");
+
+// Start File Writer Service with 5 Second Interval
+//FileWriterHandler.getFwInstance().init(5000);
 
 // initialize configuration
 dotenv.config();

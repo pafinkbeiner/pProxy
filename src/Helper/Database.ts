@@ -1,5 +1,6 @@
 import { JsonDB } from 'node-json-db';
 import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
+import { FileWriterHandler } from './FileWriter';
  
 // The second argument is used to tell the DB to save after each push
 // If you put false, you'll have to call the save() method.
@@ -11,19 +12,35 @@ var db = new JsonDB(new Config("db", true, false, '/'));
 export class Database{
 
     set(key:string, data: any){
-        db.push(`/data[${key}]`,data);
+        db.push(`/data/${key}`,data);
+        FileWriterHandler.getFwInstance().set(data);
     }
 
     get(key: string): any{
-        return db.getData(`/data[${key}]`);
+        return db.getData(`/data/${key}`);
     }
 
     getAll(){
-        return db.getData(`/data[]`);
+        return db.getData(`/data`);
     }
 
     remove(key: string){
-        db.delete(`/data[${key}]`);
+        db.delete(`/data/${key}`);
+        FileWriterHandler.getFwInstance().remove(key);
+    }
+
+    getAllAsArray(){
+        
+        const data = db.getData(`/data`);
+
+        let array: any = [];
+
+        Object.keys(data).map(item => {
+
+            array.push(data[item]);
+        });
+
+        return array;
     }
 }
 
