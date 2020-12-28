@@ -16,7 +16,6 @@ router.get("/",function(req, res, next) {
 });
 
 router.post("/new", (req,res,next) => {
-  console.log("Try to make new",req.body);
 
   const server_name: string = req.body.server_name;
   const protocol: string = req.body.protocol;
